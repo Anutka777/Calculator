@@ -49,6 +49,14 @@ const fillDisplay = function(item) {
   document.getElementById('display').innerText = displayValue;
 }
 
+const clearAll = function() {
+  displayValue = '';
+  a = null;
+  b = null;
+  operator = null;
+  document.getElementById('display').innerText = displayValue;
+}
+
 const digitButtons = Array.from(document.getElementsByClassName('digit'));
 
 digitButtons.forEach(item => {
@@ -64,3 +72,7 @@ operatorButtons.forEach(item => {
 const equalsButton = document.getElementById('equals');
 
 equalsButton.addEventListener('click', showingResults);
+
+const clearButton = document.getElementById('clear');
+
+clearButton.addEventListener('click', clearAll);
