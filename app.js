@@ -25,3 +25,21 @@ const operate = function(operator, a, b) {
     return divide(a, b);
   } else return "ERROR";
 }
+
+const buttons = Array.from(document.getElementsByClassName('digit'));
+
+// DEL
+// const getValue = function(item) {
+//   console.log(item.target.innerText);
+// };
+
+const fillDisplay = function(item) {
+  let displayValue = '';
+  displayValue += item.target.innerText;
+  console.log(displayValue);
+  document.getElementById('display').innerText = displayValue;
+}
+
+buttons.forEach(item => {
+  item.addEventListener('click', fillDisplay);
+});

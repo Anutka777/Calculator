@@ -7,7 +7,7 @@
   padding-top: 3em;
 }
 
-.calc-body {
+#calc-body {
   margin: 0 auto;
   padding: 1em;
   padding-bottom: 0;
@@ -17,7 +17,7 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.display {
+#display {
   margin: 0 auto;
   margin-top: 0.2em;
   padding: 0 0.5em;
