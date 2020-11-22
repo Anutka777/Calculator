@@ -67,7 +67,7 @@ button:focus {
   outline: none;
 }
 
-.clear {
+#clear {
   background-color: #99291E;
   border-color: #99291E;
   color: #ffc857;
