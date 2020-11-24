@@ -1,22 +1,22 @@
 let displayValue = '';
 let a;
 let b;
-let operator;
+let operator = '';
 
 const add = function(a, b) {
-  return a + b;
+  return (Math.round((a + b) * 10000000000) / 10000000000);
 }
 
 const substruct = function(a, b) {
-  return a - b;
+  return (Math.round((a - b) * 10000000000) / 10000000000);
 }
 
 const multiply = function(a, b) {
-  return a * b;
+  return (Math.round(a * b * 10000000000) / 10000000000);
 }
 
 const divide = function(a, b) {
-  return a / b;
+  return (Math.round(a / b * 10000000000) / 10000000000);
 }
 
 const operate = function(operator, a, b) {
@@ -28,20 +28,29 @@ const operate = function(operator, a, b) {
     return multiply(a, b);
   } else if (operator === '/') {
     return divide(a, b);
-  } else return "ERROR";
+  } else return "Empty Operator";
 }
 
 let storeOperator = function(item) {
-  a = +displayValue;
-  operator = item.target.innerText;
-  displayValue = '';
+  if (operator === '') {
+    a = +displayValue;
+    operator = item.target.innerText;
+    displayValue = '';
+  } else {
+    b = +displayValue;
+    a = displayValue = operate(operator, a, b);
+    operator = item.target.innerText;
+    document.getElementById('display').innerText = displayValue;
+    displayValue = '';
+  }
 }
 
 const showingResults = function() {
   b = +displayValue;
-  displayValue = operate(operator, a, b);
+  a = displayValue = operate(operator, a, b);
   document.getElementById('display').innerText = displayValue;
   displayValue = '';
+  operator = '';
 }
 
 const fillDisplay = function(item) {
