@@ -4,19 +4,23 @@ let b;
 let operator = '';
 
 const add = function(a, b) {
-  return (Math.round((a + b) * 10000000000) / 10000000000);
+  return (Math.round((a + b) * 100000000) / 100000000);
 }
 
 const substruct = function(a, b) {
-  return (Math.round((a - b) * 10000000000) / 10000000000);
+  return (Math.round((a - b) * 100000000) / 100000000);
 }
 
 const multiply = function(a, b) {
-  return (Math.round(a * b * 10000000000) / 10000000000);
+  return (Math.round((a * b) * 100000000) / 100000000);
 }
 
 const divide = function(a, b) {
-  return (Math.round(a / b * 10000000000) / 10000000000);
+  if (b === 0) {
+    return ("<~INFINITY~>")
+  } else {
+    return (Math.round(a / b * 100000000) / 100000000);
+  }
 }
 
 const operate = function(operator, a, b) {
@@ -33,24 +37,41 @@ const operate = function(operator, a, b) {
 
 let storeOperator = function(item) {
   if (operator === '') {
-    a = +displayValue;
-    operator = item.target.innerText;
-    displayValue = '';
+
+    // Case initial(first) operation - we don't have first operand
+    if (a === undefined || a === null) {
+      if (displayValue !== '') {
+        a = +displayValue;
+      }
+      operator = item.target.innerText;
+      displayValue = '';
+    } else {
+
+      // Case after "=" - first operand is already on display
+      operator = item.target.innerText;
+    }
   } else {
-    b = +displayValue;
-    a = displayValue = operate(operator, a, b);
-    operator = item.target.innerText;
-    document.getElementById('display').innerText = displayValue;
-    displayValue = '';
+    if (displayValue !== '') {
+        // Chain evaluation
+        b = +displayValue;
+        a = displayValue = operate(operator, a, b);
+        operator = item.target.innerText;
+        document.getElementById('display').innerText = displayValue;
+        displayValue = '';
+    }
   }
 }
 
 const showingResults = function() {
-  b = +displayValue;
-  a = displayValue = operate(operator, a, b);
-  document.getElementById('display').innerText = displayValue;
-  displayValue = '';
-  operator = '';
+  if (a !== undefined  && displayValue !== '') {
+    b = +displayValue;
+  }
+  if (b !== undefined && operator !== '') {
+    a = displayValue = operate(operator, a, b);
+    document.getElementById('display').innerText = displayValue;
+    displayValue = '';
+    operator = '';
+  }
 }
 
 const fillDisplay = function(item) {
@@ -62,10 +83,11 @@ const clearAll = function() {
   displayValue = '';
   a = null;
   b = null;
-  operator = null;
+  operator = '';
   document.getElementById('display').innerText = displayValue;
 }
 
+// Event listeners
 const digitButtons = Array.from(document.getElementsByClassName('digit'));
 
 digitButtons.forEach(item => {
