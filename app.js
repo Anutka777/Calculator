@@ -1,10 +1,13 @@
+// Variables
 let displayValue = '';
 let a;
 let b;
 let operator = '';
 
+// Status paragraph
 const statusText = document.getElementById('status');
 
+// Arithmetic functions
 const add = function(a, b) {
   return (Math.round((a + b) * 100000000) / 100000000);
 }
@@ -26,6 +29,7 @@ const divide = function(a, b) {
   }
 }
 
+// Choose operation
 const operate = function(operator, a, b) {
   if (operator === '+') {
     return add(a, b);
@@ -38,6 +42,7 @@ const operate = function(operator, a, b) {
   } else return "Empty Operator";
 }
 
+// Store 1st operand + operator
 let storeOperator = function(item) {
   if (operator === '') {
 
@@ -51,11 +56,14 @@ let storeOperator = function(item) {
     } else {
 
       // Case after "=" - first operand is already on display
+      a = +displayValue;
       operator = item.target.innerText;
+      displayValue = '';
     }
+
+  // Chain evaluation
   } else {
     if (displayValue !== '') {
-        // Chain evaluation
         b = +displayValue;
         a = displayValue = operate(operator, a, b);
         operator = item.target.innerText;
@@ -65,6 +73,7 @@ let storeOperator = function(item) {
   }
 }
 
+// Store 2nd operand and evaluate
 const showingResults = function() {
   if (a !== undefined  && displayValue !== '') {
     b = +displayValue;
@@ -78,8 +87,14 @@ const showingResults = function() {
 }
 
 const fillDisplay = function(item) {
+
+  // Limit digits input
   if (displayValue.length < 10) {
+
+    // Limit "." input by only one
     if (item.target.innerText === '.') {
+
+      // Add 0 in case starting input with "."
       if (displayValue === '') {
         displayValue += '0';
         displayValue += item.target.innerText;
@@ -122,4 +137,3 @@ const clearButton = document.getElementById('clear');
 
 clearButton.addEventListener('click', clearAll);
 
-const dotButton = document.getElementById('dot');

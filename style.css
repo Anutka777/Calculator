@@ -41,6 +41,7 @@
   padding: 1em 1em;
   display: grid;
   grid-template-columns: 2fr 2fr;
+  column-gap: 1em;
 }
 
 .digits-block {
