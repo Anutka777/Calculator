@@ -78,8 +78,18 @@ const showingResults = function() {
 }
 
 const fillDisplay = function(item) {
-  displayValue += item.target.innerText;
-  document.getElementById('display').innerText = displayValue;
+  if (displayValue.length < 10) {
+    if (item.target.innerText === '.') {
+      if (displayValue === '') {
+        displayValue += '0';
+        displayValue += item.target.innerText;
+        document.getElementById('display').innerText = displayValue;
+      } 
+    } else {
+      displayValue += item.target.innerText;
+      document.getElementById('display').innerText = displayValue;
+    }
+  }
 }
 
 const clearAll = function() {
@@ -111,3 +121,5 @@ equalsButton.addEventListener('click', showingResults);
 const clearButton = document.getElementById('clear');
 
 clearButton.addEventListener('click', clearAll);
+
+const dotButton = document.getElementById('dot');
