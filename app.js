@@ -3,6 +3,8 @@ let a;
 let b;
 let operator = '';
 
+const statusText = document.getElementById('status');
+
 const add = function(a, b) {
   return (Math.round((a + b) * 100000000) / 100000000);
 }
@@ -17,7 +19,8 @@ const multiply = function(a, b) {
 
 const divide = function(a, b) {
   if (b === 0) {
-    return ("<~INFINITY~>")
+    statusText.innerHTML = `You can't divide by 0. Push C-button to proceed.`;
+    return '<~INFINITY~>';
   } else {
     return (Math.round(a / b * 100000000) / 100000000);
   }
@@ -85,6 +88,7 @@ const clearAll = function() {
   b = null;
   operator = '';
   document.getElementById('display').innerText = displayValue;
+  statusText.innerHTML = '';
 }
 
 // Event listeners

@@ -14,7 +14,9 @@
   width: 22em;
   background-color: #280003;
   border-radius: 1.5em;
+  border: 5px outset #ffc857;
   font-family: 'Courier New', Courier, monospace;
+  box-shadow: 2px 2px 5px #280003;
 }
 
 #display {
@@ -71,4 +73,15 @@ button:focus {
   background-color: #99291E;
   border-color: #99291E;
   color: #ffc857;
+}
+
+#status {
+  line-height: 5em;
+  text-align: center;
+  text-transform: uppercase;
+  font-family:'Courier New', Courier, monospace;
+  font-size: large;
+  font-weight: bold;
+  color: #280003;
+  text-shadow: 2px 2px 5px #ffc857;
 }
