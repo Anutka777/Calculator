@@ -116,6 +116,11 @@ const clearAll = function() {
   statusText.innerHTML = '';
 }
 
+const deleteLastDigit = function() {
+  displayValue = displayValue.slice(0, -1);
+  document.getElementById('display').innerText = displayValue;
+}
+
 // Event listeners
 const digitButtons = Array.from(document.getElementsByClassName('digit'));
 
@@ -137,3 +142,6 @@ const clearButton = document.getElementById('clear');
 
 clearButton.addEventListener('click', clearAll);
 
+const bckspaceButton = document.getElementById('bckspace');
+
+bckspaceButton.addEventListener('click', deleteLastDigit);
