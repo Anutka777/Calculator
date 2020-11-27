@@ -73,6 +73,36 @@ let storeOperator = function(item) {
   }
 }
 
+let storeOperatorByKey = function(item) {
+  if (operator === '') {
+
+    // Case initial(first) operation - we don't have first operand
+    if (a === undefined || a === null) {
+      if (displayValue !== '') {
+        a = +displayValue;
+      }
+      operator = item.key;
+      displayValue = '';
+    } else {
+
+      // Case after "=" - first operand is already on display
+      a = +displayValue;
+      operator = item.key;
+      displayValue = '';
+    }
+
+  // Chain evaluation
+  } else {
+    if (displayValue !== '') {
+        b = +displayValue;
+        a = displayValue = operate(operator, a, b);
+        operator = item.key
+        document.getElementById('display').innerText = displayValue;
+        displayValue = '';
+    }
+  }
+}
+
 // Store 2nd operand and evaluate
 const showingResults = function() {
   if (a !== undefined  && displayValue !== '') {
@@ -99,11 +129,39 @@ const fillDisplay = function(item) {
         displayValue += '0';
         displayValue += item.target.innerText;
         document.getElementById('display').innerText = displayValue;
-      } 
+      } else {
+        if (!displayValue.includes('.'))
+        displayValue += item.target.innerText;
+        document.getElementById('display').innerText = displayValue;
+      }
     } else {
       displayValue += item.target.innerText;
       document.getElementById('display').innerText = displayValue;
     }
+  }
+}
+
+let fillDisplayByKeys = function(item) {
+    // Limit digits input
+    if (displayValue.length < 10) {
+
+      // Limit "." input by only one
+      if (item.key === '.') {
+
+        // Add 0 in case starting input with "."
+        if (displayValue === '') {
+          displayValue += '0';
+          displayValue += item.key;
+          document.getElementById('display').innerText = displayValue;
+        } else {
+          if (!displayValue.includes('.'))
+          displayValue += item.key;
+          document.getElementById('display').innerText = displayValue;
+        }
+      } else {
+        displayValue += item.key;
+        document.getElementById('display').innerText = displayValue;
+      } 
   }
 }
 
@@ -145,3 +203,17 @@ clearButton.addEventListener('click', clearAll);
 const bckspaceButton = document.getElementById('bckspace');
 
 bckspaceButton.addEventListener('click', deleteLastDigit);
+
+document.addEventListener('keydown', function(item) {
+  let keyDigitCheck = /[\d\.]/;
+  let keyOperatorCheck = /[\+\-\(/)\*]/;
+  if (keyDigitCheck.exec(item.key)) {
+    fillDisplayByKeys(item);
+  } else if (item.key === 'Backspace') {
+    deleteLastDigit();
+  } else if (item.key === 'Enter' || item.key === "=") {
+    showingResults();
+  } else if (keyOperatorCheck.exec(item.key)) {
+    storeOperatorByKey(item);
+  }
+})
