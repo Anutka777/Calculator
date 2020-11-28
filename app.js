@@ -56,7 +56,6 @@ let storeOperator = function(item) {
     } else {
 
       // Case after "=" - first operand is already on display
-      a = +displayValue;
       operator = item.target.innerText;
       displayValue = '';
     }
@@ -73,10 +72,10 @@ let storeOperator = function(item) {
   }
 }
 
+// Same for keyboard
 let storeOperatorByKey = function(item) {
   if (operator === '') {
 
-    // Case initial(first) operation - we don't have first operand
     if (a === undefined || a === null) {
       if (displayValue !== '') {
         a = +displayValue;
@@ -84,14 +83,10 @@ let storeOperatorByKey = function(item) {
       operator = item.key;
       displayValue = '';
     } else {
-
-      // Case after "=" - first operand is already on display
-      a = +displayValue;
       operator = item.key;
       displayValue = '';
     }
 
-  // Chain evaluation
   } else {
     if (displayValue !== '') {
         b = +displayValue;
@@ -121,7 +116,6 @@ const fillDisplay = function(item) {
   // Limit digits input
   if (displayValue.length < 10) {
 
-    // Limit "." input by only one
     if (item.target.innerText === '.') {
 
       // Add 0 in case starting input with "."
@@ -130,6 +124,8 @@ const fillDisplay = function(item) {
         displayValue += item.target.innerText;
         document.getElementById('display').innerText = displayValue;
       } else {
+
+        // Limit "." input by only one
         if (!displayValue.includes('.'))
         displayValue += item.target.innerText;
         document.getElementById('display').innerText = displayValue;
@@ -141,27 +137,25 @@ const fillDisplay = function(item) {
   }
 }
 
+// Same for keyboard
 let fillDisplayByKeys = function(item) {
-    // Limit digits input
-    if (displayValue.length < 10) {
+  if (displayValue.length < 10) {
 
-      // Limit "." input by only one
-      if (item.key === '.') {
+    if (item.key === '.') {
 
-        // Add 0 in case starting input with "."
-        if (displayValue === '') {
-          displayValue += '0';
-          displayValue += item.key;
-          document.getElementById('display').innerText = displayValue;
-        } else {
-          if (!displayValue.includes('.'))
-          displayValue += item.key;
-          document.getElementById('display').innerText = displayValue;
-        }
-      } else {
+      if (displayValue === '') {
+        displayValue += '0';
         displayValue += item.key;
         document.getElementById('display').innerText = displayValue;
-      } 
+      } else {
+        if (!displayValue.includes('.'))
+          displayValue += item.key;
+        document.getElementById('display').innerText = displayValue;
+      }
+    } else {
+      displayValue += item.key;
+      document.getElementById('display').innerText = displayValue;
+    } 
   }
 }
 
