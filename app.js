@@ -47,18 +47,12 @@ let storeOperator = function(item) {
   if (operator === '') {
 
     // Case initial(first) operation - we don't have first operand
-    if (a === undefined || a === null) {
-      if (displayValue !== '') {
-        a = +displayValue;
-      }
-      operator = item.target.innerText;
-      displayValue = '';
-    } else {
-
-      // Case after "=" - first operand is already on display
-      operator = item.target.innerText;
-      displayValue = '';
+    if (displayValue !== '') {
+      a = +displayValue;
     }
+    operator = item.target.innerText;
+    displayValue = '';
+  
 
   // Chain evaluation
   } else {
@@ -76,16 +70,16 @@ let storeOperator = function(item) {
 let storeOperatorByKey = function(item) {
   if (operator === '') {
 
-    if (a === undefined || a === null) {
+    // if (a === undefined || a === null) {
       if (displayValue !== '') {
         a = +displayValue;
       }
       operator = item.key;
       displayValue = '';
-    } else {
-      operator = item.key;
-      displayValue = '';
-    }
+    // } else {
+    //   operator = item.key;
+    //   displayValue = '';
+    // }
 
   } else {
     if (displayValue !== '') {
@@ -160,17 +154,22 @@ let fillDisplayByKeys = function(item) {
 }
 
 const clearAll = function() {
-  displayValue = '';
-  a = null;
-  b = null;
-  operator = '';
-  document.getElementById('display').innerText = displayValue;
-  statusText.innerHTML = '';
+  // TODO:
+  // The following code works in debagger just fine, but doesn't in browser. 
+  // Evaluation just shows blank screen. Mystery to be solved... 
+  // I'll go with reload page for now.
+  // displayValue = '';
+  // operator = '';
+  // document.getElementById('display').innerText = displayValue;
+  // statusText.innerHTML = '';
+  window.location.reload(false);
 }
 
 const deleteLastDigit = function() {
-  displayValue = displayValue.slice(0, -1);
-  document.getElementById('display').innerText = displayValue;
+  if (displayValue !== '') {
+    displayValue = displayValue.slice(0, -1);
+    document.getElementById('display').innerText = displayValue;
+  }
 }
 
 // Event listeners
