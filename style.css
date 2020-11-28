@@ -4,10 +4,19 @@
 }
 
 .container {
-  padding-top: 3em;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(to right bottom, #663131, #280003, #200606);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #calc-body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: 0 auto;
   padding: 1em;
   padding-bottom: 0;
@@ -76,6 +85,16 @@ button:focus {
   color: #ffc857;
 }
 
+#equals {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+#dot {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
 #status {
   line-height: 5em;
   text-align: center;
@@ -84,5 +103,5 @@ button:focus {
   font-size: large;
   font-weight: bold;
   color: #280003;
-  text-shadow: 2px 2px 5px #ffc857;
+  text-shadow: 5px 5px 12px #ffc857;
 }

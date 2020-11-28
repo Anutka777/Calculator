@@ -10,15 +10,15 @@ const statusText = document.getElementById('status');
 // Arithmetic functions
 const add = function(a, b) {
   return (Math.round((a + b) * 100000000) / 100000000);
-}
+};
 
 const substruct = function(a, b) {
   return (Math.round((a - b) * 100000000) / 100000000);
-}
+};
 
 const multiply = function(a, b) {
   return (Math.round((a * b) * 100000000) / 100000000);
-}
+};
 
 const divide = function(a, b) {
   if (b === 0) {
@@ -27,7 +27,7 @@ const divide = function(a, b) {
   } else {
     return (Math.round(a / b * 100000000) / 100000000);
   }
-}
+};
 
 // Choose operation
 const operate = function(operator, a, b) {
@@ -40,7 +40,7 @@ const operate = function(operator, a, b) {
   } else if (operator === '/') {
     return divide(a, b);
   } else return "Empty Operator";
-}
+};
 
 // Store 1st operand + operator
 let storeOperator = function(item) {
@@ -64,7 +64,7 @@ let storeOperator = function(item) {
         displayValue = '';
     }
   }
-}
+};
 
 // Same for keyboard
 let storeOperatorByKey = function(item) {
@@ -85,12 +85,12 @@ let storeOperatorByKey = function(item) {
     if (displayValue !== '') {
         b = +displayValue;
         a = displayValue = operate(operator, a, b);
-        operator = item.key
+        operator = item.key;
         document.getElementById('display').innerText = displayValue;
         displayValue = '';
     }
   }
-}
+};
 
 // Store 2nd operand and evaluate
 const showingResults = function() {
@@ -103,7 +103,7 @@ const showingResults = function() {
     displayValue = '';
     operator = '';
   }
-}
+};
 
 const fillDisplay = function(item) {
 
@@ -129,7 +129,7 @@ const fillDisplay = function(item) {
       document.getElementById('display').innerText = displayValue;
     }
   }
-}
+};
 
 // Same for keyboard
 let fillDisplayByKeys = function(item) {
@@ -151,7 +151,7 @@ let fillDisplayByKeys = function(item) {
       document.getElementById('display').innerText = displayValue;
     } 
   }
-}
+};
 
 const clearAll = function() {
   // TODO:
@@ -163,14 +163,14 @@ const clearAll = function() {
   // document.getElementById('display').innerText = displayValue;
   // statusText.innerHTML = '';
   window.location.reload(false);
-}
+};
 
 const deleteLastDigit = function() {
   if (displayValue !== '') {
     displayValue = displayValue.slice(0, -1);
     document.getElementById('display').innerText = displayValue;
   }
-}
+};
 
 // Event listeners
 const digitButtons = Array.from(document.getElementsByClassName('digit'));
