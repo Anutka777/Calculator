@@ -23,9 +23,18 @@
   width: 22em;
   background-color: #280003;
   border-radius: 1.5em;
-  border: 5px outset #ffc857;
-  font-family: 'Courier New', Courier, monospace;
+  border: 3px outset #ffc857;
   box-shadow: 2px 2px 5px #280003;
+  font-family:'Courier New', Courier, monospace;
+}
+
+#sasio {
+  padding-left: 1.5em;
+  color: #ffc857;
+  line-height: 0.5;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
 }
 
 #display {
@@ -104,4 +113,14 @@ button:focus {
   font-weight: bold;
   color: #280003;
   text-shadow: 5px 5px 12px #ffc857;
+}
+
+@media screen and (max-width: 400px) {
+#calc-body {
+  width: 15em;
+}
+
+#display {
+  width: 6em;
+}
 }
