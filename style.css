@@ -105,13 +105,14 @@ button:focus {
 }
 
 #status {
-  line-height: 5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   text-align: center;
   text-transform: uppercase;
   font-family:'Courier New', Courier, monospace;
   font-size: large;
   font-weight: bold;
-  color: #280003;
+  color: #ffc857;
   text-shadow: 5px 5px 12px #ffc857;
 }
 
@@ -121,6 +122,7 @@ button:focus {
 }
 
 #display {
-  width: 6em;
+  width: 9em;
+  font-size: 1.3em;
 }
 }
